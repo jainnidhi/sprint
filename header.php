@@ -77,7 +77,7 @@
 		<?php if(get_theme_mod('sprint_featured_slider') == '1' && get_theme_mod('sprint_featured_slider') != '') { ?>
 			<?php if(is_home() && !is_paged()) { ?>
 				<div class="featuredBox">
-					<?php $i = 1; $slider_cat = 1; if(get_theme_mod('sprint_featured_slider_cat') != '') { $slider_cat = implode( get_theme_mod('sprint_featured_slider_cat')); } $my_query = new WP_Query('cat='.$slider_cat.'&posts_per_page=4&ignore_sticky_posts=1'); 
+					<?php $i = 1; $slider_cat = 1; if(get_theme_mod('sprint_featured_slider_cat') != '') { $slider_cat = implode('', get_theme_mod('sprint_featured_slider_cat')); } $my_query = new WP_Query('cat='.$slider_cat.'&posts_per_page=4&ignore_sticky_posts=1'); 
 						while ($my_query->have_posts()) : $my_query->the_post(); ?>
 						<?php if($i == 1){ ?> 
 							<div class="firstpost excerpt">

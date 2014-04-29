@@ -468,13 +468,7 @@ function sprint_customize_register($wp_customize) {
         'priority' => 20,
     )));
 
-    $wp_customize->add_control(
-            new sprint_customize_textarea_control(
-            $wp_customize, 'sprint_header_code', array(
-        'label' => __('Add your header code here', 'sprint'),
-        'section' => 'sprint_header_code_section',
-        'settings' => 'sprint_header_code'
-    )));
+    
 
     $wp_customize->add_section('sprint_footer_featured', array(
         'title' => __('Footer Featured', 'sprint'),
