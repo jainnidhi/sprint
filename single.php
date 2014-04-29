@@ -17,30 +17,30 @@
 						</header>
 						<!-- Start Content -->
 						<div class="post-single-content box mark-links">
-							<?php if ($sprint_options['sprint_posttop_adcode'] != '') { ?>
-								<?php $toptime = $sprint_options['sprint_posttop_adcode_time']; if (strcmp( date("Y-m-d", strtotime( "-$toptime day")), get_the_time("Y-m-d") ) >= 0) { ?>
+							<?php if (get_theme_mod('sprint_posttop_adcode') != '') { ?>
+								<?php $toptime = get_theme_mod('sprint_posttop_adcode_time'); if (strcmp( date("Y-m-d", strtotime( "-$toptime day")), get_the_time("Y-m-d") ) >= 0) { ?>
 									<div class="topad">
-										<?php echo $sprint_options['sprint_posttop_adcode']; ?>
+										<?php echo get_theme_mod('sprint_posttop_adcode'); ?>
 									</div>
 								<?php } ?>
 							<?php } ?>
 							<?php the_content(); ?>
 							<?php wp_link_pages(array('before' => '<div class="pagination">', 'after' => '</div>', 'link_before'  => '<span class="current"><span class="currenttext">', 'link_after' => '</span></span>', 'next_or_number' => 'next_and_number', 'nextpagelink' => __('Next','sprint'), 'previouspagelink' => __('Previous','sprint'), 'pagelink' => '%','echo' => 1 )); ?>
-							<?php if ($sprint_options['sprint_postend_adcode'] != '') { ?>
-								<?php $endtime = $sprint_options['sprint_postend_adcode_time']; if (strcmp( date("Y-m-d", strtotime( "-$endtime day")), get_the_time("Y-m-d") ) >= 0) { ?>
+							<?php if (get_theme_mod('sprint_postend_adcode') != '') { ?>
+								<?php $endtime = get_theme_mod('sprint_postend_adcode_time'); if (strcmp( date("Y-m-d", strtotime( "-$endtime day")), get_the_time("Y-m-d") ) >= 0) { ?>
 									<div class="bottomad">
-										<?php echo $sprint_options['sprint_postend_adcode'];?>
+										<?php echo get_theme_mod('sprint_postend_adcode');?>
 									</div>
 								<?php } ?>
 							<?php } ?> 
-							<?php if($sprint_options['sprint_tags'] == '1') { ?>
+							<?php if(get_theme_mod('sprint_tags') == '1') { ?>
 								<!-- Start Tags -->
 								<div class="tags"><?php the_tags('<span class="tagtext">'.__('Tags','sprint').':</span>',', ') ?></div>
 								<!-- End Tags -->
 							<?php } ?>
 						</div>
 						<!-- End Content -->
-						<?php if($sprint_options['sprint_related_posts'] == '1') { ?>	
+						<?php if(get_theme_mod('sprint_related_posts') == '1') { ?>	
 							<!-- Start Related Posts -->
 							<?php $categories = get_the_category($post->ID); if ($categories) { $category_ids = array(); foreach($categories as $individual_category) $category_ids[] = $individual_category->term_id; $args=array( 'category__in' => $category_ids, 'post__not_in' => array($post->ID), 'ignore_sticky_posts' => 1, 'showposts'=>4,'orderby' => 'rand' );
 							$my_query = new wp_query( $args ); if( $my_query->have_posts() ) {
@@ -67,7 +67,7 @@
 								<?php } echo '</ul></div></div>'; }} wp_reset_query(); ?>
 							<!-- End Related Posts -->
 						<?php }?>  
-						<?php if($sprint_options['sprint_author_box'] == '1') { ?>
+						<?php if(get_theme_mod('sprint_author_box') == '1') { ?>
 							<!-- Start Author Box -->
 							<div class="postauthor-container">
 								<h4><?php _e('About The Author', 'sprint'); ?></h4>

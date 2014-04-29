@@ -15,11 +15,11 @@
 </head>
 <body id ="blog" <?php body_class('main'); ?>>
 	<div class="main-container">
-		<?php if(isset($sprint_options['sprint_trending_articles'])) { if($sprint_options['sprint_trending_articles'] == '1' && $sprint_options['sprint_trending_articles'] != '') { ?>
+		<?php  if(get_theme_mod('sprint_trending_articles') == '1' && get_theme_mod('sprint_trending_articles') != '') { ?>
 			<div class="trending-articles">
 				<ul>
 					<li class="firstlink"><?php _e('Now Trending','sprint'); ?>:</li>
-					<?php $i = 1; $my_query = new wp_query( 'cat='.$sprint_options['sprint_trending_articles_cat'].'&posts_per_page=4&ignore_sticky_posts=1' ); ?>
+					<?php $i = 1; $my_query = new wp_query( 'cat='.get_theme_mod('sprint_trending_articles_cat').'&posts_per_page=4&ignore_sticky_posts=1' ); ?>
 					<?php if ($my_query->have_posts()) : while ($my_query->have_posts()) : $my_query->the_post(); ?>
 						<li class="trendingPost <?php if($i % 4 == 0){echo 'last';} ?>">
 							<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>" rel="bookmark"><?php sprint_short_title('...', 24); ?></a>
@@ -27,14 +27,14 @@
 					<?php $i++; endwhile; endif;?>
 				</ul>
 			</div>
-		<?php }} ?>
+		<?php } ?>
 		<header class="main-header">
 			<div id="header">
-				<?php if ($sprint_options['sprint_logo'] != '') { ?>
+				<?php if (get_theme_mod('sprint_logo') != '') { ?>
 					<?php if( is_front_page() || is_home() || is_404() ) { ?>
-						<h1 id="logo" class="image-logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo $sprint_options['sprint_logo']; ?>" alt="<?php bloginfo( 'name' ); ?>"></a></h1>
+						<h1 id="logo" class="image-logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_theme_mod('sprint_logo'); ?>" alt="<?php bloginfo( 'name' ); ?>"></a></h1>
 					<?php } else { ?>
-						<h2 id="logo" class="image-logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo $sprint_options['sprint_logo']; ?>" alt="<?php bloginfo( 'name' ); ?>"></a></h2>
+						<h2 id="logo" class="image-logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_theme_mod('sprint_logo'); ?>" alt="<?php bloginfo( 'name' ); ?>"></a></h2>
 					<?php } ?>
 				<?php } else { ?>
 					<?php if( is_front_page() || is_home() || is_404() ) { ?>
@@ -57,27 +57,27 @@
 				</div>
 			</div>
 		</header>
-		<?php if ($sprint_options['sprint_header_adcode'] != '') { ?>
+		<?php if (get_theme_mod('sprint_header_adcode') != '') { ?>
 			<div class="header-bottom-second">
 				<?php echo '<div id="header-widget-container">';
-				if ($sprint_options['sprint_header_adcode'] != ''){
+				if (get_theme_mod('sprint_header_adcode') != ''){
 					echo '<div class="widget-header">';
-					echo $sprint_options['sprint_header_adcode'];
+					echo get_theme_mod('sprint_header_adcode');
 					echo '</div>';
 				}
 				?>
-				<?php if ($sprint_options['sprint_posttopleft_adcode'] != ''){ ?>
+				<?php if (get_theme_mod('sprint_posttopleft_adcode') != ''){ ?>
 					<div class="widget-header-bottom-right">
 						<div class="textwidget">
-							<div class="topad"><?php echo $sprint_options['sprint_posttopleft_adcode']; ?> </div>
+							<div class="topad"><?php echo get_theme_mod('sprint_posttopleft_adcode'); ?> </div>
 						</div>
 					</div> 
 				<?php } ?>
 		<?php echo '</div></div>'; } ?>
-		<?php if(isset($sprint_options['sprint_featured_slider'])) { if($sprint_options['sprint_featured_slider'] == '1' && $sprint_options['sprint_featured_slider'] != '') { ?>
+		<?php if(get_theme_mod('sprint_featured_slider') == '1' && get_theme_mod('sprint_featured_slider') != '') { ?>
 			<?php if(is_home() && !is_paged()) { ?>
 				<div class="featuredBox">
-					<?php $i = 1; $slider_cat = 1; if($sprint_options['sprint_featured_slider_cat'] != '') { $slider_cat = implode(",", $sprint_options['sprint_featured_slider_cat']); } $my_query = new WP_Query('cat='.$slider_cat.'&posts_per_page=4&ignore_sticky_posts=1'); 
+					<?php $i = 1; $slider_cat = 1; if(get_theme_mod('sprint_featured_slider_cat') != '') { $slider_cat = implode( get_theme_mod('sprint_featured_slider_cat')); } $my_query = new WP_Query('cat='.$slider_cat.'&posts_per_page=4&ignore_sticky_posts=1'); 
 						while ($my_query->have_posts()) : $my_query->the_post(); ?>
 						<?php if($i == 1){ ?> 
 							<div class="firstpost excerpt">
@@ -129,4 +129,4 @@
 					<?php $i++; endwhile; wp_reset_query(); ?> 
 				</div>
 			<?php } ?>
-		<?php }} ?>
+		<?php } ?>

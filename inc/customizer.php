@@ -229,7 +229,7 @@ function sprint_customize_register($wp_customize) {
         'priority' => 30,
     ));
 
-    // select category for featured posts 
+    
     $wp_customize->add_setting('sprint_featured_slider_cat', array('default' => 0,));
     $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_featured_slider_cat', array(
         'label' => __('Featured Category', 'sprint'),
@@ -307,16 +307,24 @@ function sprint_customize_register($wp_customize) {
     ));
 
 
-    $wp_customize->add_setting('sprint_trending_articles_cat', array(
+    $wp_customize->add_setting('sprint_trending_articles', array(
         'default' => 0,
     ));
-    $wp_customize->add_control('sprint_trending_articles_cat', array(
+    $wp_customize->add_control('sprint_trending_articles', array(
         'label' => __('Trending', 'sprint'),
         'section' => 'sprint_trending',
         'priority' => 10,
         'type' => 'checkbox',
     ));
 
+    $wp_customize->add_setting('sprint_trending_articles_cat', array('default' => 0,));
+    $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_trending_articles_cat', array(
+        'label' => __('Trending Category', 'sprint'),
+        'section' => 'sprint_trending',
+        'type' => 'dropdown-categories',
+        'settings' => 'sprint_trending_articles_cat',
+        'priority' => 20,
+    )));
 
     $wp_customize->add_section('sprint_single_post_options', array(
         'title' => __('Single Posts', 'sprint'),
@@ -450,6 +458,15 @@ function sprint_customize_register($wp_customize) {
         'priority' => 10,
         'type' => 'checkbox',
     ));
+    
+    $wp_customize->add_setting('sprint_featured_slider_cat', array('default' => 0,));
+    $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_featured_slider_cat', array(
+        'label' => __('Featured Category', 'sprint'),
+        'section' => 'sprint_home_featured',
+        'type' => 'dropdown-categories',
+        'settings' => 'sprint_featured_slider_cat',
+        'priority' => 20,
+    )));
 
     $wp_customize->add_control(
             new sprint_customize_textarea_control(
@@ -474,6 +491,16 @@ function sprint_customize_register($wp_customize) {
         'priority' => 10,
         'type' => 'checkbox',
     ));
+    
+    $wp_customize->add_setting('sprint_featured_carousel_cat', array('default' => 0,));
+    $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_featured_carousel_cat', array(
+        'label' => __('Featured Category', 'sprint'),
+        'section' => 'sprint_footer_featured',
+        'type' => 'dropdown-categories',
+        'settings' => 'sprint_featured_carousel_cat',
+        'priority' => 20,
+    )));
+    
 
     $wp_customize->remove_section('background_image');
 }

@@ -2,10 +2,10 @@
 		</div><!--.content-->
 	</div><!--#page-->
 <footer>
-	<?php if(isset($sprint_options['sprint_featured_carousel'])) { if($sprint_options['sprint_featured_carousel'] == '1' && $sprint_options['sprint_featured_carousel'] != '') { ?>
+	<?php  if(get_theme_mod('sprint_featured_carousel') == '1' && get_theme_mod('sprint_featured_carousel') != '') { ?>
 		<div class="carousel">
-			<h3 class="frontTitle"><div class="latest"><?php $first_cat = $sprint_options['sprint_featured_carousel_cat']; echo get_cat_name( $first_cat ); ?></div></h3>
-			<?php $i = 1; $my_query = new wp_query( 'cat='.$sprint_options['sprint_featured_carousel_cat'].'&posts_per_page=6&ignore_sticky_posts=1' );
+			<h3 class="frontTitle"><div class="latest"><?php $first_cat = get_theme_mod('sprint_featured_carousel_cat'); echo get_cat_name( $first_cat ); ?></div></h3>
+			<?php $i = 1; $my_query = new wp_query( 'cat='.get_theme_mod('sprint_featured_carousel_cat').'&posts_per_page=6&ignore_sticky_posts=1' );
 				while ($my_query->have_posts()) : $my_query->the_post(); ?>
 					<div class="excerpt">
 						<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>" rel="nofollow" id="footer-thumbnail">
@@ -26,7 +26,7 @@
 					</div><!--.post excerpt-->                
 			<?php endwhile; wp_reset_query(); ?> 
 		</div>
-	<?php }} ?>
+	<?php } ?>
 </footer><!--footer-->
 <div class="copyrights"><?php sprint_copyrights_credit(); ?></div>
     <?php if (get_theme_mod('sprint_copyrights') != '') { ?>
