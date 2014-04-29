@@ -8,9 +8,9 @@
 	.secondary-navigation {
         width: 35%;
         margin-bottom: 20px;
-        margin-top: 20px;
+        margin-top: 0px;
     
-        margin-right: 2.2%;
+        margin-right:0;
         position: absolute;
         right: 0;
         z-index: 1;
@@ -103,7 +103,7 @@
         width: 100%;
         position: relative;
         color: #fff;
-        padding: 10px 0;
+        padding: 17px 0;
         text-indent: 3%;
         overflow: hidden;
         max-width: 100%;
@@ -117,7 +117,7 @@
         display: inline-block;
         position: absolute;
         right: 3%;
-        top: 10px;
+        top: 15px;
     }
     .secondary-navigation #navigation ul .sfHover a, .secondary-navigation #navigation ul li:hover, .secondary-navigation #navigation ul .sfHover ul li {
         background: transparent;
@@ -213,6 +213,7 @@
     .widget-header-bottom-right {
         max-width: 100%;
         margin-top: 15px;
+        text-align:center;
     }
 }
 @media screen and (max-width:720px) { 
