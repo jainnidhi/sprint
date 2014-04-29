@@ -46,6 +46,18 @@ if ( function_exists( 'register_nav_menus' ) ) {
 endif;
 add_action( 'after_setup_theme', 'sprint_setup' );
 
+
+
+// Enable support for Custom Backgrounds
+        add_theme_support('custom-background', array(
+            // Background color default
+            'default-color' => 'fff',
+            // Background image default
+            'default-image' => '',
+            'header-text' => 'true',
+            'flex-height' => 'true',
+            'flex-width' => 'true'
+        ));
 /*-----------------------------------------------------------------------------------*/
 /*	Load Menu Description
 /*-----------------------------------------------------------------------------------*/

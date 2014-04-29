@@ -29,6 +29,9 @@
 	<?php }} ?>
 </footer><!--footer-->
 <div class="copyrights"><?php sprint_copyrights_credit(); ?></div>
+    <?php if (get_theme_mod('sprint_copyrights') != '') { ?>
+                <div class="row smallprint right"><?php echo wpautop(get_theme_mod('sprint_copyrights')); ?></div>
+           <?php } ?>
 <?php wp_footer(); ?>
 </div><!--.main-container-->
 </body>
