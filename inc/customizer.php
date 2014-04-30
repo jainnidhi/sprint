@@ -197,17 +197,6 @@ function sprint_customize_register($wp_customize) {
             )
     );
 
-    $wp_customize->add_setting('sprint_footer_logo');
-
-    $wp_customize->add_control(
-            new WP_Customize_Image_Control(
-            $wp_customize, 'sprint_footer_logo', array(
-        'label' => 'Footer Logo Image',
-        'section' => 'sprint_theme_general_settings',
-        'settings' => 'sprint_footer_logo'
-            )
-            )
-    );
 
 
     $wp_customize->add_setting('sprint_favicon');
@@ -229,7 +218,7 @@ function sprint_customize_register($wp_customize) {
         'priority' => 30,
     ));
 
-    
+
     $wp_customize->add_setting('sprint_featured_slider_cat', array('default' => 0,));
     $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_featured_slider_cat', array(
         'label' => __('Featured Category', 'sprint'),
@@ -283,14 +272,15 @@ function sprint_customize_register($wp_customize) {
 
     // Add custom CSS section 
     $wp_customize->add_section(
-            'sprint_header_code_section', array(
+        'sprint_header_code_section', array(
         'title' => __('Header Code', 'sprint'),
         'priority' => 80,
     ));
 
     $wp_customize->add_setting(
-            'sprint_header_code', array(
+        'sprint_header_code', array(
         'default' => '',
+        'sanitize_js_callback' => 'sprint_sanitize_escaping',
     ));
 
     $wp_customize->add_control(
@@ -309,6 +299,7 @@ function sprint_customize_register($wp_customize) {
 
     $wp_customize->add_setting('sprint_trending_articles', array(
         'default' => 0,
+        'sanitize_callback' => 'sprint_sanitize_checkbox',
     ));
     $wp_customize->add_control('sprint_trending_articles', array(
         'label' => __('Trending', 'sprint'),
@@ -334,6 +325,7 @@ function sprint_customize_register($wp_customize) {
 
     $wp_customize->add_setting('sprint_tags', array(
         'default' => 0,
+        'sanitize_callback' => 'sprint_sanitize_checkbox',
     ));
     $wp_customize->add_control('sprint_tags', array(
         'label' => __('Tag Links', 'sprint'),
@@ -344,6 +336,7 @@ function sprint_customize_register($wp_customize) {
 
     $wp_customize->add_setting('sprint_related_posts', array(
         'default' => 0,
+        'sanitize_callback' => 'sprint_sanitize_checkbox',
     ));
     $wp_customize->add_control('sprint_related_posts', array(
         'label' => __('Related Posts', 'sprint'),
@@ -354,6 +347,7 @@ function sprint_customize_register($wp_customize) {
 
     $wp_customize->add_setting('sprint_author_box', array(
         'default' => 0,
+        'sanitize_callback' => 'sprint_sanitize_checkbox',
     ));
     $wp_customize->add_control('sprint_author_box', array(
         'label' => __('Author Box', 'sprint'),
@@ -451,6 +445,7 @@ function sprint_customize_register($wp_customize) {
     // enable featured products on front page?
     $wp_customize->add_setting('sprint_featured_slider', array(
         'default' => 0,
+        'sanitize_callback' => 'sprint_sanitize_checkbox',
     ));
     $wp_customize->add_control('sprint_featured_slider', array(
         'label' => __('Show home page featured', 'sprint'),
@@ -458,7 +453,7 @@ function sprint_customize_register($wp_customize) {
         'priority' => 10,
         'type' => 'checkbox',
     ));
-    
+
     $wp_customize->add_setting('sprint_featured_slider_cat', array('default' => 0,));
     $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_featured_slider_cat', array(
         'label' => __('Featured Category', 'sprint'),
@@ -468,7 +463,7 @@ function sprint_customize_register($wp_customize) {
         'priority' => 20,
     )));
 
-    
+
 
     $wp_customize->add_section('sprint_footer_featured', array(
         'title' => __('Footer Featured', 'sprint'),
@@ -478,6 +473,7 @@ function sprint_customize_register($wp_customize) {
     // enable featured products on front page?
     $wp_customize->add_setting('sprint_featured_carousel', array(
         'default' => 0,
+        'sanitize_callback' => 'sprint_sanitize_checkbox',
     ));
     $wp_customize->add_control('sprint_featured_carousel', array(
         'label' => __('Show Footer featured', 'sprint'),
@@ -485,7 +481,7 @@ function sprint_customize_register($wp_customize) {
         'priority' => 10,
         'type' => 'checkbox',
     ));
-    
+
     $wp_customize->add_setting('sprint_featured_carousel_cat', array('default' => 0,));
     $wp_customize->add_control(new WP_Customize_Dropdown_Categories_Control($wp_customize, 'sprint_featured_carousel_cat', array(
         'label' => __('Featured Category', 'sprint'),
@@ -494,7 +490,7 @@ function sprint_customize_register($wp_customize) {
         'settings' => 'sprint_featured_carousel_cat',
         'priority' => 20,
     )));
-    
+
 
     $wp_customize->remove_section('background_image');
 }
@@ -562,6 +558,19 @@ function sprint_sanitize_layout_option($layout_option) {
     return $layout_option;
 }
 
+/*
+ * Sanitize Checkbox input values
+ * 
+ * @since SmartShop 1.2
+ */
+function sprint_sanitize_checkbox( $input ) {
+    if ( $input ) {
+            $output = '1';
+    } else {
+            $output = false;
+    }
+    return $output;
+}
 /**
  * Change theme colors based on theme options from customizer.
  *
@@ -637,12 +646,11 @@ function sprint_color_style() {
 
     </style>
     <style type="text/css" id="sprint-custom-css">
-    <?php echo trim(get_theme_mod('sprint_custom_css')); ?>
+        <?php echo trim(get_theme_mod('sprint_custom_css')); ?>
     </style>
-        <?php
-    }
+    <?php
+}
 
-    add_action('wp_head', 'sprint_color_style');
+add_action('wp_head', 'sprint_color_style');
 
 
-    
